@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="android_image" type="id"/>
+    <item name="wrapper" type="id"/>
+    <item name="corner_1" type="id"/>
+    <item name="corner_2" type="id"/>
+    <item name="corner_3" type="id"/>
+    <item name="corner_4" type="id"/>
+
+</resources>
