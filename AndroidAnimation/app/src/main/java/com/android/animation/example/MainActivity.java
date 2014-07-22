@@ -80,13 +80,14 @@ public class MainActivity extends Activity implements View.OnTouchListener {
     }
 
     private class ViewOnDragListener implements View.OnDragListener {
-        int xLimit = getScreenSize().x / 2;
-        int yLimit = getScreenSize().y / 2;
 
         @Override
         public boolean onDrag(View v, DragEvent event) {
             if (event.getAction() == DragEvent.ACTION_DROP) {
                 View view = (View) event.getLocalState();
+
+                int xLimit = (mWrapper.getWidth() / 2) - mImageOffset;
+                int yLimit = (mWrapper.getHeight() / 2) - mImageOffset;
 
                 float dropX = event.getX() - mImageOffset;
                 float dropY = event.getY() - mImageOffset;
