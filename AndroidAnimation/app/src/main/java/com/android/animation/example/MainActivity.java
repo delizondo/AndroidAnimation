@@ -13,8 +13,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.CycleInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+
+import java.util.Random;
 
 
 public class MainActivity extends Activity implements View.OnTouchListener {
@@ -41,6 +44,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         mImageView = (ImageView) findViewById(R.id.android_image);
         mImageView.setTag(IMAGE_TAG);
         mImageView.setOnLongClickListener(new ImageLongClickListener());
+        mImageView.setOnClickListener(new ImageClickListener());
         mImageOffset = getResources().getDimensionPixelSize(R.dimen.image_size) / 2;
 
         mWrapper = (RelativeLayout) findViewById(R.id.wrapper);
@@ -76,6 +80,48 @@ public class MainActivity extends Activity implements View.OnTouchListener {
             view.startDrag(data, shadowBuilder, view, 0);
             view.setVisibility(View.INVISIBLE);
             return false;
+        }
+    }
+
+    private class ImageClickListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+
+            int currentPosition = 0;
+
+            if (mImageView.getX() == mCorner1.getX() && mImageView.getY() == mCorner1.getY()) {
+                currentPosition = 1;
+            } else if (mImageView.getX() == mCorner2.getX() && mImageView.getY() == mCorner2.getY()) {
+                currentPosition = 2;
+            } else if (mImageView.getX() == mCorner3.getX() && mImageView.getY() == mCorner3.getY()) {
+                currentPosition = 3;
+            } else if (mImageView.getX() == mCorner4.getX() && mImageView.getY() == mCorner4.getY()) {
+                currentPosition = 4;
+            }
+
+            int newPosition;
+
+            do {
+                newPosition = new Random().nextInt(4) + 1;
+            } while (newPosition == currentPosition);
+
+            switch (newPosition) {
+                case 1:
+                    mImageView.animate().x(mCorner1.getX()).y(mCorner1.getY());
+                    break;
+                case 2:
+                    mImageView.animate().x(mCorner2.getX()).y(mCorner2.getY());
+                    break;
+                case 3:
+                    mImageView.animate().x(mCorner3.getX()).y(mCorner3.getY());
+                    break;
+                case 4:
+                    mImageView.animate().x(mCorner4.getX()).y(mCorner4.getY());
+                    break;
+            }
+
+
         }
     }
 
@@ -134,7 +180,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         return super.onOptionsItemSelected(item);
     }
 
-    
+
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         switch (event.getAction()) {
