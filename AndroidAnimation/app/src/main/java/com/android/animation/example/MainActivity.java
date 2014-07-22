@@ -134,14 +134,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         return super.onOptionsItemSelected(item);
     }
 
-    private Point getScreenSize() {
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        return size;
-    }
-
-
+    
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         switch (event.getAction()) {
